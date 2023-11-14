@@ -1,48 +1,32 @@
 package com.muebleria.demo.controller;
 
 import java.io.OutputStream;
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.muebleria.demo.repository.ITipoUsuarioRepository;
-import com.muebleria.demo.repository.IUsuariosRepository;
-import com.muebleria.demo.model.Usuario;
 import com.muebleria.demo.model.Clientes;
 import com.muebleria.demo.model.Empleados;
 import com.muebleria.demo.model.Productos;
-// import com.muebleria.demo.model.Detalleboleta;
-// import com.muebleria.demo.model.Empleados;
-// import com.muebleria.demo.model.Productos;
 import com.muebleria.demo.model.Proveedor;
+import com.muebleria.demo.model.Usuario;
+import com.muebleria.demo.repository.ITipoUsuarioRepository;
+import com.muebleria.demo.repository.IUsuariosRepository;
 import com.muebleria.demo.repository.iClienteRepository;
 import com.muebleria.demo.repository.iEmpleadoRepository;
 import com.muebleria.demo.repository.iProductoRepository;
-// import com.muebleria.demo.repository.iDetalleboletaRepository;
-// import com.muebleria.demo.repository.iEmpleadoRepository;
-// import com.muebleria.demo.repository.iProductoRepository;
 import com.muebleria.demo.repository.iProveedorRepository;
 import com.muebleria.demo.repository.iPuestoRepository;
-// import com.muebleria.demo.repository.iPuestoRepository;
 import com.muebleria.demo.repository.iTipoRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -159,15 +143,20 @@ public class MuebleriaController {
 					model.addAttribute("proveedores", new Proveedor());
 			return "ReporteProveedor";
 		}
-	/* 	@GetMapping("/cargarReporteEmpleado")
-		public String abrirReporteEmpleado(Model model) {
+
+
+
+		@GetMapping("cargarReporteEmpleado")
+		public String abrirReporteEmpleado(Model model){
 			List<Empleados> empleado = repoEmp.findAll();
 			model.addAttribute("lstEmpleado", repoEmp.findAll());
-			// enviar un atributo de tipo producto para guardar la informacion
+				//enviar un atributo de tipo producto para guardar la informacion
 			model.addAttribute("empleado", new Empleados());
 			model.addAttribute("lstPuesto", repoPues.findAll());
 			return "ReporteEmpleado";
-		} */
+		}
+
+
 		
 		@GetMapping("/cargarIndex")
 		public String abrirIndex(Model model, HttpSession session) {
@@ -251,8 +240,8 @@ public class MuebleriaController {
 		}
 		
 
-
-		/* 
+		
+		 
 		@GetMapping("/cargarConsultaCliente")
 		public String abrirpagConsultaCliente(Model model) {
 			 List<Clientes> clientes = repoCli.findAll();
@@ -269,7 +258,7 @@ public class MuebleriaController {
 					model.addAttribute("proveedores", new Proveedor());
 			return "ConsultaProveedores";
 		}
-		*/
+		
 		@GetMapping("/cargarConsultaProductos")
 		public String abrirpagConsultaProductos(Model model, HttpSession session) {
 		    Usuario usuario = (Usuario) session.getAttribute("u");
@@ -612,13 +601,16 @@ public class MuebleriaController {
 				return "Login.html";
 			}
 			//cerrar session
-			/* 
+			
+			
 			@GetMapping("/CerrarSesion")
 			public String cerrarSesion(HttpServletRequest request , HttpSession session) {
 				session.invalidate();
 				return "Login";
 			}
-			/* 
+				
+			
+			
 			//reportes
 			 @GetMapping("/reporteventa")
 			 public void generarPDFVenta(HttpServletResponse response) {
@@ -648,7 +640,7 @@ public class MuebleriaController {
 					e.printStackTrace();
 				}
 			}
-			*/
+			
 			
 			@GetMapping("/reportecliente")
 			public void generarPDFCliente(HttpServletResponse response) {
