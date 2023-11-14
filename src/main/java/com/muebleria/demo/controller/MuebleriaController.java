@@ -28,15 +28,20 @@ import com.muebleria.demo.repository.ITipoUsuarioRepository;
 import com.muebleria.demo.repository.IUsuariosRepository;
 import com.muebleria.demo.model.Usuario;
 import com.muebleria.demo.model.Clientes;
+import com.muebleria.demo.model.Empleados;
+import com.muebleria.demo.model.Productos;
 // import com.muebleria.demo.model.Detalleboleta;
 // import com.muebleria.demo.model.Empleados;
 // import com.muebleria.demo.model.Productos;
 import com.muebleria.demo.model.Proveedor;
 import com.muebleria.demo.repository.iClienteRepository;
+import com.muebleria.demo.repository.iEmpleadoRepository;
+import com.muebleria.demo.repository.iProductoRepository;
 // import com.muebleria.demo.repository.iDetalleboletaRepository;
 // import com.muebleria.demo.repository.iEmpleadoRepository;
 // import com.muebleria.demo.repository.iProductoRepository;
 import com.muebleria.demo.repository.iProveedorRepository;
+import com.muebleria.demo.repository.iPuestoRepository;
 // import com.muebleria.demo.repository.iPuestoRepository;
 import com.muebleria.demo.repository.iTipoRepository;
 
@@ -54,11 +59,11 @@ public class MuebleriaController {
 	// llamar al repository -> usando objetos
 			
 			private  iClienteRepository repoCli;
-		//	private  iEmpleadoRepository repoEmp;
-		//	private  iPuestoRepository repoPues;
+			private  iEmpleadoRepository repoEmp;
+			private  iPuestoRepository repoPues;
 			private  iProveedorRepository repoProv;
-		//	private  iProductoRepository repoProd;
-		//	private  iTipoRepository repoTip;
+			private  iProductoRepository repoProd;
+			private  iTipoRepository repoTip;
 			private ITipoUsuarioRepository repoTipoUsua;
 			private IUsuariosRepository repoUsua; 
 		//	private iDetalleboletaRepository repoDetboleta; 
@@ -196,7 +201,7 @@ public class MuebleriaController {
 					model.addAttribute("proveedores", new Proveedor());
 			return "MantenedorProveedores";
 		}
-	/* 	@GetMapping("/cargarMantenedorProductos")
+	 	@GetMapping("/cargarMantenedorProductos")
 		public String abrirpagMantenedorProductos(Model model , HttpSession session) {
 			Usuario usuario = (Usuario) session.getAttribute("u");
 			  model.addAttribute("lstTipo", repoTip.findAll());
@@ -219,8 +224,8 @@ public class MuebleriaController {
 			    }
 			
 			
-		} */
-	/* 	@GetMapping("/cargarMantenedorEmpleado")
+		} 
+		@GetMapping("/cargarMantenedorEmpleado")
 		public String abrirpagMantenedorEmpleado(Model model) {
 			model.addAttribute("lstPuesto", repoPues.findAll());
 			// enviar un atributo de tipo producto para guardar la informacion
@@ -247,7 +252,7 @@ public class MuebleriaController {
 		
 
 
-		
+		/* 
 		@GetMapping("/cargarConsultaCliente")
 		public String abrirpagConsultaCliente(Model model) {
 			 List<Clientes> clientes = repoCli.findAll();
@@ -264,6 +269,7 @@ public class MuebleriaController {
 					model.addAttribute("proveedores", new Proveedor());
 			return "ConsultaProveedores";
 		}
+		*/
 		@GetMapping("/cargarConsultaProductos")
 		public String abrirpagConsultaProductos(Model model, HttpSession session) {
 		    Usuario usuario = (Usuario) session.getAttribute("u");
@@ -294,7 +300,7 @@ public class MuebleriaController {
 			model.addAttribute("lstPuesto", repoPues.findAll());
 			return "ConsultaEmpleado.html";
 		}
-		*/
+		/* 
 		
 		//controlador para grabar un cliente 
 			@PostMapping("/cliente/grabar")
@@ -347,7 +353,7 @@ public class MuebleriaController {
 			    return "ConsultaCliente";
 			}
 			
-			
+		*/	
 			
 		//controlador para grabar un proveedor 
 			@PostMapping("/proveedores/grabar")
@@ -402,7 +408,7 @@ public class MuebleriaController {
 			
 			
 			//controlador para grabar un empleado 
-	/* 		@PostMapping("/empleado/grabar")
+		@PostMapping("/empleado/grabar")
 			public String guardarEmpleado(@ModelAttribute Empleados empleado, Model model, @RequestParam (name="btn") String opcion , HttpServletResponse response) {
 				model.addAttribute("empleado", new Empleados());
 				//leer el obj de tipo producto
@@ -467,6 +473,7 @@ public class MuebleriaController {
 			    // y devuelve la vista correspondiente
 			    return "redirect:/cargarConsultaEmpleado"; // Redirecciona a la página de consulta de clientes
 			}
+			
 			@PostMapping("/empleado/buscar")
 			public String buscarEmp(@RequestParam("nombre") String nombre, Model model) {
 			    List<Empleados> resultados = repoEmp.findByNombreContaining(nombre);
@@ -572,7 +579,7 @@ public class MuebleriaController {
 			    }
 			}
 			
-			*/
+			
 			//Login
 			@PostMapping("/login")
 			public String procesoLogin( @RequestParam("txtUsuario") String usuario ,@RequestParam("txtClave") String clave,HttpSession session, Model model) {
@@ -588,6 +595,7 @@ public class MuebleriaController {
 					return "Login";
 				}
 			}
+			
 			// grabar usuario
 			@PostMapping("/usuario/grabar")
 			public String GrabarUsuario(@ModelAttribute("usuarios") Usuario usuario, Model model) {
@@ -604,7 +612,7 @@ public class MuebleriaController {
 				return "Login.html";
 			}
 			//cerrar session
-			
+			/* 
 			@GetMapping("/CerrarSesion")
 			public String cerrarSesion(HttpServletRequest request , HttpSession session) {
 				session.invalidate();
