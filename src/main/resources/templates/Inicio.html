@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/inicio.css">
+	<title>Document</title>
+
+</head>
+<body>
+        <header>
+            <h2 class="titulo">Muebleria</h2>
+            <nav class="navigation">
+                <a  href="/cargarIndex" >Inicio</a>
+        <a  href="/cargarMantenedores" >  Mantenedores</a>     
+        <a  href="/cargarConsulta" >Consultas</a>      
+        <a  href="/cargarReportes" >Reportes</a>
+                <button class="btnCompra"  href="../Login-Registro/Carrito.html"><ion-icon   class="icon"  name="cart-outline" ></ion-icon></button>
+            </nav>
+        </header>
+
+        <section class="home">
+            <div class="home-text">
+                <h1>MUEBLERIA S.A.</h1>
+                <P>Bienvenidos aqui encontrarás la solución perfecta para amueblar tu hogar con estilo y comodidad</P>
+                <br>
+                <p>Explore por el sitio web y disfrute de su estadia</p>
+            </div>
+
+        </section>
+</body>
+</html>
+
+<script  type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
