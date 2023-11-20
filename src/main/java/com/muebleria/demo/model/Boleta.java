@@ -1,5 +1,6 @@
 package com.muebleria.demo.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -13,4 +14,5 @@ public class Boleta {
 	private String num_bol;
 	private String fch_bol;
 	private int codigo;
+
 }

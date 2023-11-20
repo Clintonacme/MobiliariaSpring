@@ -18,4 +18,6 @@ public class DetalleBoleta {
 	private int cantidad;
 	private double preciovta;
 	private double importe;
+
+
 }

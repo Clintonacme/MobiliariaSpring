@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class VentaController {
     }
 
 
-
+    
     @GetMapping("{numBol}")
     public ResponseEntity<DetalleBoleta> findByDetalleBoleta(@PathVariable String numBol){
         return ResponseEntity.of(repoDetalle.findByNumBol(numBol));
@@ -53,4 +54,18 @@ public class VentaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la venta");
         }
     }
+
+    @DeleteMapping("{numBol}")
+    public ResponseEntity<String> eliminarDetalleBoletaPorNumBoleta(@PathVariable String numBol) {
+        int resultado2 = repoDetalle.eliminarDetallesPorNumeroBoleta(numBol);
+        int resultado1 = repoBoleta.eliminarBoletaPorNumeroBoleta(numBol);
+        
+        if (resultado2 > 0 && resultado1 > 0) {
+            return ResponseEntity.ok("Boleta y detalles eliminados con éxito para el número de boleta: " + numBol);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la boleta para el número de boleta: " + numBol);
+        }
+}
+
+   
 }

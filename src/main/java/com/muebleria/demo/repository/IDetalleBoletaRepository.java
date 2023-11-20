@@ -34,13 +34,26 @@ public interface IDetalleBoletaRepository extends JpaRepository<DetalleBoleta,In
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO tb_boleta VALUES (?1, CURDATE(), ?2)", nativeQuery = true)
-    int insertarCabeceraBoleta(String numBoleta, int codigo);
+    @Query(value = "DELETE FROM tb_det_boleta  WHERE num_bol = :numBol", nativeQuery = true)
+    int eliminarDetallesPorNumeroBoleta(@Param("numBol") String numBol);
 
     @Transactional
     @Modifying
+    @Query(value = "INSERT INTO tb_boleta VALUES (?1, CURDATE(), ?2)", nativeQuery = true)
+    int insertarCabeceraBoleta(String numBoleta, int codigo);
+
+    /*@Transactional
+    @Modifying
     @Query(value = "INSERT INTO tb_det_boleta (num_bol, cod_prod, cantidad, preciovta , importe , nom_prod) VALUES (?1, ?2, ?3, ?4, ?5 , ?6)", nativeQuery = true)
-    int insertarDetalleBoleta(String numBoleta, int codProd, int cantidad, double precioVta , double importe , String nom_prod);
+    int insertarDetalleBoleta(String numBoleta, int codProd, int cantidad, double precioVta , double importe , String nom_prod);*/
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO tb_det_boleta (num_bol, cod_prod, cantidad, preciovta, importe, nom_prod) " +
+        "VALUES (?1, ?2, ?3, ?4, ?5, (SELECT descripcion FROM tb_productos WHERE cod_prod = ?2))",
+        nativeQuery = true)
+    int insertarDetalleBoleta(String numBoleta, int codProd, int cantidad, double precioVta, double importe);
+
 
     @Transactional
     @Modifying
@@ -51,7 +64,7 @@ public interface IDetalleBoletaRepository extends JpaRepository<DetalleBoleta,In
         int rs = 0;
         try {
             String numBoleta = generaNumBoleta();
-
+           
           
             rs += insertarCabeceraBoleta(numBoleta, cab.getCodigo());
 
@@ -62,7 +75,7 @@ public interface IDetalleBoletaRepository extends JpaRepository<DetalleBoleta,In
             }
 
             for (DetalleBoleta d : detalles) {
-                rs += insertarDetalleBoleta(numBoleta, d.getCod_prod(), d.getCantidad(), d.getPreciovta(), d.getImporte() , d.getNomProd());
+                rs += insertarDetalleBoleta(numBoleta, d.getCod_prod(), d.getCantidad(), d.getPreciovta(), d.getCantidad() * d.getPreciovta());
                 rs += actualizarStock(d.getCantidad(), Integer.toString(d.getCod_prod()));
             }
         } catch (Exception e) {
@@ -72,8 +85,9 @@ public interface IDetalleBoletaRepository extends JpaRepository<DetalleBoleta,In
         return rs;
     }
 
-    @Query(value = "SELECT COUNT(*) FROM DetalleBoleta d WHERE d.num_bol = :numBol")
+   @Query(value = "SELECT COUNT(*) FROM DetalleBoleta d WHERE d.numBol = :numBol")
     Long countByNumBol(@Param("numBol") String numBol);
 
     Optional<DetalleBoleta> findByNumBol(String numBol);
+
 }
