@@ -75,7 +75,8 @@ public interface IDetalleBoletaRepository extends JpaRepository<DetalleBoleta,In
             }
 
             for (DetalleBoleta d : detalles) {
-                rs += insertarDetalleBoleta(numBoleta, d.getCod_prod(), d.getCantidad(), d.getPreciovta(), d.getCantidad() * d.getPreciovta());
+                double precio = consultaPrecioProducto(d.getCod_prod());
+                rs += insertarDetalleBoleta(numBoleta, d.getCod_prod(), d.getCantidad(), precio, d.getCantidad() * precio);
                 rs += actualizarStock(d.getCantidad(), Integer.toString(d.getCod_prod()));
             }
         } catch (Exception e) {
@@ -84,6 +85,9 @@ public interface IDetalleBoletaRepository extends JpaRepository<DetalleBoleta,In
         }
         return rs;
     }
+
+    @Query(value = "SELECT precio FROM tb_productos WHERE cod_prod = ?1", nativeQuery = true)
+    Double consultaPrecioProducto(int codProd);
 
    @Query(value = "SELECT COUNT(*) FROM DetalleBoleta d WHERE d.numBol = :numBol")
     Long countByNumBol(@Param("numBol") String numBol);
