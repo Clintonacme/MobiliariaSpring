@@ -49,7 +49,7 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Integer registrarUsuario(@RequestBody @Valid UsuarioRequest usuarioRequest){
+    public Integer registrarUsuario( @RequestBody @Valid UsuarioRequest usuarioRequest){
         Usuario usuario = new Usuario();
         usuario.nombre = usuarioRequest.nombre;
         usuario.apellido = usuarioRequest.apellido;
@@ -69,7 +69,7 @@ public class UsuarioController {
     }
 
     @PutMapping("{codigo}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer codigo, @RequestBody UsuarioRequest usuarioRequest){
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer codigo, @RequestBody @Valid UsuarioRequest usuarioRequest){
         return repoUsua.findById(codigo).map(usuario ->{
         usuario.nombre = usuarioRequest.nombre;
         usuario.apellido = usuarioRequest.apellido;

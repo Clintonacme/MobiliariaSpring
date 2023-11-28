@@ -1,6 +1,5 @@
 package com.muebleria.demo.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,6 +21,7 @@ import com.muebleria.demo.model.VentaRequest;
 import com.muebleria.demo.repository.IBoletaRepository;
 import com.muebleria.demo.repository.IDetalleBoletaRepository;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 
@@ -52,7 +52,7 @@ public class VentaController {
 
 
     @PostMapping("generar")
-    public ResponseEntity<String> realizarVenta(@RequestBody VentaRequest ventaRequest) {
+    public ResponseEntity<String> realizarVenta(@RequestBody @Valid VentaRequest ventaRequest) {
         Boleta cabecera = ventaRequest.getCabecera();
         List<DetalleBoleta> detalles = ventaRequest.getDetalles();
 
@@ -66,7 +66,7 @@ public class VentaController {
     }
 
     @DeleteMapping("{numBol}")
-    public ResponseEntity<String> eliminarDetalleBoletaPorNumBoleta(@PathVariable String numBol) {
+    public ResponseEntity<String> eliminarDetalleBoletaPorNumBoleta(@PathVariable @Valid String numBol) {
         int resultado2 = repoDetalle.eliminarDetallesPorNumeroBoleta(numBol);
         int resultado1 = repoBoleta.eliminarBoletaPorNumeroBoleta(numBol);
         

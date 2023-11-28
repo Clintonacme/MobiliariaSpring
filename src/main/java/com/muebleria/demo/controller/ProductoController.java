@@ -71,7 +71,7 @@ public class ProductoController {
 
 
     @PutMapping("{cod_prod}")
-    public ResponseEntity<Productos> actualizarProducto(@PathVariable Integer cod_prod , @RequestBody ProductoRequest productoRequest) {
+    public ResponseEntity<Productos> actualizarProducto(@PathVariable Integer cod_prod , @RequestBody @Valid ProductoRequest productoRequest) {
 		
 		return repoProd.findById(cod_prod).map(producto ->{
             producto.cod_provee = productoRequest.cod_provee;

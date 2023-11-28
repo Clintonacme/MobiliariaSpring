@@ -63,7 +63,7 @@ public class ProveedorController {
     }
 
     @PutMapping("{cod_provee}")
-    public ResponseEntity<Proveedor> actualizarProveedor(@PathVariable Integer cod_provee , @RequestBody ProveedorRequest proveedorRequest){
+    public ResponseEntity<Proveedor> actualizarProveedor(@PathVariable Integer cod_provee , @RequestBody @Valid ProveedorRequest proveedorRequest){
 
             return  repoProv.findById(cod_provee).map(proveedor ->{          
                 proveedor.razon = proveedorRequest.razon;

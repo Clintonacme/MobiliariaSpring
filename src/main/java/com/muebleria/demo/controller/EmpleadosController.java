@@ -64,7 +64,7 @@ public class EmpleadosController {
     }
 
     @PutMapping("{codigo}")
-    public ResponseEntity<Empleados> actualizarEmpleados(@PathVariable Integer codigo, @RequestBody EmpleadosRequest empleadosRequest ){
+    public ResponseEntity<Empleados> actualizarEmpleados(@PathVariable Integer codigo, @RequestBody @Valid EmpleadosRequest empleadosRequest ){
         return repoEmp.findById(codigo).map(empleado ->{
             empleado.nombre = empleadosRequest.nombre;
             empleado.apellido = empleadosRequest.apellido;
