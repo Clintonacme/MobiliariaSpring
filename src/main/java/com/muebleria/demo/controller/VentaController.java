@@ -40,8 +40,8 @@ public class VentaController {
 
     
     @GetMapping("{numBol}")
-    public ResponseEntity<DetalleBoleta> findByDetalleBoleta(@PathVariable String numBol){
-        return ResponseEntity.of(repoDetalle.findByNumBol(numBol));
+    public List<DetalleBoleta> findByDetalleBoleta(@PathVariable String numBol){
+        return repoDetalle.findByNumBol(numBol);
     }
 
     @Transactional(readOnly = false)

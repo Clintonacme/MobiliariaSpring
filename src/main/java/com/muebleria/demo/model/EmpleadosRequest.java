@@ -16,6 +16,5 @@ public class EmpleadosRequest {
     @NotBlank(message = "complete el campo apellido")
 	public String apellido;
     @Min(value = 1)
-    @Max(value = 4)
 	public int puesto;
 }

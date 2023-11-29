@@ -1,6 +1,8 @@
 package com.muebleria.demo.model;
 
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -18,7 +20,7 @@ public class Usuario {
 	 public String apellido;
 	 public String usuario;
 	 public String clave;
-	 public String fnacim;
+	 public LocalDate fnacim;
 	 public int tipo;
 	
 	 

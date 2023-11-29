@@ -20,7 +20,7 @@ public interface IDetalleBoletaRepository extends JpaRepository<DetalleBoleta,In
     Optional<String> findMaxNumBoleta();
 
     default String generaNumBoleta() {
-        String codigo = "B0001";  // valor del código por default, cuando no hay datos
+        String codigo = "B0001";  
 
         Optional<String> maxNumBoleta = findMaxNumBoleta();
         if (maxNumBoleta.isPresent()) {
@@ -91,7 +91,8 @@ public interface IDetalleBoletaRepository extends JpaRepository<DetalleBoleta,In
    @Query(value = "SELECT COUNT(*) FROM DetalleBoleta d WHERE d.numBol = :numBol")
     Long countByNumBol(@Param("numBol") String numBol);
 
-    Optional<DetalleBoleta> findByNumBol(String numBol);
+    List<DetalleBoleta> findByNumBol(String numBol);
+
 
      @Procedure(name = "consultaFecha")
     List<Object[]> consultaFecha(@Param("fch_bol") String fchBol);

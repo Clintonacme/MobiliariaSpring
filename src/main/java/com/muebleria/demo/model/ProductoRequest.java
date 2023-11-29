@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.Setter;
 
 @Setter
@@ -13,14 +14,13 @@ public class ProductoRequest {
 	@Min(value= 1001)
     public int cod_provee;
 
-	@Pattern(regexp = "[a-zA-Z\\s]+")
+	@Pattern(regexp = "[0-9a-zA-Z\\s]+")
     @NotBlank
 	public String descripcion;
 
 	@Min(value = 1)
-	@Max(value = 2)
 	public int idtipo;
-
+	@Min(value = 1)
 	public int stock;
 	
 	@DecimalMin(value = "1.0")
